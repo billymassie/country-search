@@ -119,6 +119,26 @@
   font-size: 52px;
   line-height: 1px;
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  text-decoration: underline;
+  color: #7c53b5;
+}
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

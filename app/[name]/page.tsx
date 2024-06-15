@@ -135,24 +135,40 @@ const ResultPage = () => {
                 {country.idd.root[1]}
                 {country.idd.suffixes}
               </p>
-              <p>
-                <span style={{ textDecoration: 'underline', color: '#7c53b5' }}>
-                  {callingCode?.length} country
-                </span>{' '}
-                with this calling code
-              </p>
+              <div className={styles.tooltip}>
+                {callingCode?.length} country{' '}
+                <div className={styles.tooltiptext}>
+                  {callingCode?.map((e: any) => (
+                    <p
+                      style={{ fontSize: 12, textAlign: 'left', padding: 4 }}
+                      key={e.name}
+                    >
+                      {e.name}
+                    </p>
+                  ))}
+                </div>
+              </div>{' '}
+              <span>with this currency</span>
             </div>
             <div>
               <p className={styles.title}>Currency</p>
               <p className={styles.info}>
                 {country.currencies ? Object.keys(country.currencies)[0] : null}
               </p>
-              <p>
-                <span style={{ textDecoration: 'underline', color: '#7c53b5' }}>
-                  {currency?.length} country
-                </span>{' '}
-                with this currency
-              </p>
+              <div className={styles.tooltip}>
+                {currency?.length} country{' '}
+                <div className={styles.tooltiptext}>
+                  {currency?.map((e: any) => (
+                    <p
+                      style={{ fontSize: 12, textAlign: 'left', padding: 4 }}
+                      key={e.name}
+                    >
+                      {e.name}
+                    </p>
+                  ))}
+                </div>
+              </div>{' '}
+              <span>with this currency</span>
             </div>
           </div>
         </div>
