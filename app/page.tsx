@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 export default function Home<T extends { name: { common: string } }>() {
   const [search, setSearch] = useState('');
@@ -43,9 +44,15 @@ export default function Home<T extends { name: { common: string } }>() {
       >
         <h1>Country</h1>
         <input
+          placeholder='Type any Country name'
           type='text'
           id='search'
-          style={{ width: '100%', height: '40px', borderRadius: '8px' }}
+          style={{
+            width: '100%',
+            height: '40',
+            borderRadius: 8,
+            padding: 12,
+          }}
           onChange={e => setSearch(e.target.value)}
         />
         <div
@@ -53,13 +60,21 @@ export default function Home<T extends { name: { common: string } }>() {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            paddingLeft: '40px',
+            paddingLeft: 40,
           }}
         >
           {isNotFound ? (
             <p style={{ color: 'tomato' }}>Data Not Found</p>
           ) : (
-            suggestion.map((e, index) => <p key={index}>{e.name?.common}</p>)
+            suggestion.map((e, index) => (
+              <Link
+                style={{ textDecoration: 'none', color: 'black', paddingBlock: 8 }}
+                href={`/${e.name.common}`}
+                key={index}
+              >
+                {e.name?.common}
+              </Link>
+            ))
           )}
         </div>
       </div>
