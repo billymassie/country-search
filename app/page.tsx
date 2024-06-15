@@ -5,6 +5,7 @@ import styles from './page.module.css';
 export default function Home<T extends { name: { common: string } }>() {
   const [search, setSearch] = useState('');
   const [suggestion, setSuggestion] = useState<T[]>([]);
+  const [isNotFound, setIsNotFound] = useState(false);
 
   const fetchSuggestion = async () => {
     try {
@@ -12,6 +13,9 @@ export default function Home<T extends { name: { common: string } }>() {
       if (res.status === 200) {
         const data = await res.json();
         setSuggestion(data);
+        setIsNotFound(false);
+      } else {
+        setIsNotFound(true);
       }
     } catch (error) {
       console.log(error);
@@ -52,9 +56,11 @@ export default function Home<T extends { name: { common: string } }>() {
             paddingLeft: '40px',
           }}
         >
-          {suggestion.map((e, index) => (
-            <p key={index}>{e.name?.common}</p>
-          ))}
+          {isNotFound ? (
+            <p style={{ color: 'tomato' }}>Data Not Found</p>
+          ) : (
+            suggestion.map((e, index) => <p key={index}>{e.name?.common}</p>)
+          )}
         </div>
       </div>
     </main>
